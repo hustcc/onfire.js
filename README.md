@@ -25,7 +25,7 @@ The function will return the `eventObj`, which can be used to cancel bind with A
 
 Trigger the event named `event_name`, and with `data` as the input of `callback` function.
 
-**3. `un(eventObj / eventName)`**
+**3. `un(eventObj / event_name)`**
 
 Cancel binding event. You can unbinding a event Object, or just unbinding a event_name.
 

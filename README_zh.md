@@ -25,7 +25,7 @@ English Version Readme. [Click Here](README.md)。
 
 触发名字为 `event_name` 的事件，并且赋予变量`data`为`callback`方法的输入值。
 
-**3. `un(eventObj / eventName)`**
+**3. `un(eventObj / event_name)`**
 
 取消事件绑定。可以仅仅取消绑定一个事件回调方法，也可以直接取消全部的事件。
 
