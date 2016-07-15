@@ -11,7 +11,8 @@
   "license": "MIT",
   "keywords": [
     "onfire",
-    "events",
+    "events subscribe",
+    "events publish",
     "dispatcher",
     "react",
     "vue.js",
