@@ -80,8 +80,8 @@ onfire.size();
 
 # TODO
 
- - **clear()**：clear all events;
- - **events()**：get all event name array;
+ - **clear()**: clear all events;
+ - **events()**:get all event name array;
 
 
 # LICENSE
