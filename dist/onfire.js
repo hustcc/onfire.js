@@ -55,6 +55,17 @@ un = function(eventObject) {
     return false;
   }
 },
+clear = function() {
+  __onfireEventsStore = {};
+  length = 0;
+},
+events = function() {
+  var evts = [];
+  for (var e in __onfireEventsStore) {
+    evts.push(e);
+  }
+  return evts;
+},
 size = function () {
   return length;
 };
@@ -64,6 +75,8 @@ size = function () {
 		on: on,
 		un: un,
 		fire: fire,
-		size: size
+		size: size,
+		clear: clear,
+		events: events,
 	}
 });

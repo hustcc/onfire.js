@@ -1,6 +1,6 @@
 # onfire.js
 
-> **onfire.js** is a simple events dispatcher library (less then 1kb). simple and usefull. 
+> **onfire.js** is a simple events dispatcher library (just `0.7kb`). simple and usefull. 
 
 Can be used in:
 
@@ -76,12 +76,6 @@ onfire.un('test_event'); // cancel all events named `test_event`.
 // size of events
 onfire.size();
 ```
-
-
-# TODO
-
- - **clear()**: clear all events;
- - **events()**:get all event name array;
 
 
 # LICENSE

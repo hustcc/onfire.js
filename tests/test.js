@@ -9,7 +9,7 @@ test('onfire.js show be tested', function (t) {
     t.equal(d, 't1_test_data');
   });
   var e2 = onfire.on('test_event_1', function(d) {
-    // 不执行
+    t.fail(d);
   });
 
   t.equal(onfire.size(), 2);
@@ -26,6 +26,16 @@ test('onfire.js show be tested', function (t) {
   console.log('\n===================test fire');
   onfire.fire('test_event', 't1_test_data');
   onfire.fire('test_event_1', 't2_test_data');
+
+  console.log('\n===================test clear');
+  onfire.clear()
+
+  t.equal(onfire.size(), 0);
+
+  console.log('\n===================test events');
+  var e1 = onfire.on('test_event', function(d) {});
+  var e2 = onfire.on('test_event_1', function(d) {});
+  t.deepEqual(onfire.events(), ['test_event', 'test_event_1']);
 
   t.end();
 });

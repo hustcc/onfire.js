@@ -12,6 +12,8 @@
 		on: on,
 		un: un,
 		fire: fire,
-		size: size
+		size: size,
+		clear: clear,
+		events: events,
 	}
 });

@@ -1,6 +1,6 @@
 # onfire.js
 
-> **onfire.js** 是一个很简单的事件分发的Javascript库（小于 1kb），简洁实用。
+> **onfire.js** 是一个很简单的事件分发的Javascript库（仅仅 `0.7kb`），简洁实用。
 
 可以用于:
 
@@ -71,12 +71,6 @@ onfire.un('test_event'); // 取消绑定所有的 `test_event`.
 // 长度
 onfire.size();
 ```
-
-
-# TODO
-
- - **clear()**：清空所有；
- - **events()**：获取所有的事件名称;
 
 
 # LICENSE

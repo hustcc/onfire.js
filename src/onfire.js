@@ -47,6 +47,17 @@ un = function(eventObject) {
     return false;
   }
 },
+clear = function() {
+  __onfireEventsStore = {};
+  length = 0;
+},
+events = function() {
+  var evts = [];
+  for (var e in __onfireEventsStore) {
+    evts.push(e);
+  }
+  return evts;
+},
 size = function () {
   return length;
 };
