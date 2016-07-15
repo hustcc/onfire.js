@@ -1,0 +1,44 @@
+{
+  "name": "onfire.js",
+  "officialName": "onfire.js",
+  "version": "1.0.0",
+  "summary": "onfire.js is a simple events dispatcher library (less then 1kb). simple and usefull, can be used to in react / vue / angular for Cross-component communication.",
+  "description": "onfire.js is a simple events dispatcher library (less then 1kb). simple and usefull.",
+  "author": {
+    "name": "hustcc",
+    "url": "http://git.hust.cc/onfire.js"
+  },
+  "license": "MIT",
+  "keywords": [
+    "onfire",
+    "events",
+    "dispatcher",
+    "react",
+    "vue.js",
+    "angular",
+    "component communication"
+  ],
+  "main": "dist/onfire.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hustcc/onfire.js"
+  },
+  "bugs": {
+    "url": "https://github.com/hustcc/onfire.js/issues"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-wrap": "^0.11.0",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.2",
+    "gulp-rename": "^1.2.2",
+    "tape": "^3.6.1"
+  },
+  "scripts": {
+    "lint": "jshint src/onfire.js",
+    "test": "npm run lint && node tests/test.js",
+    "build": "gulp mini && npm run test"
+  },
+  "dependencies": {
+  }
+}
