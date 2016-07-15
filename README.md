@@ -29,7 +29,7 @@ Trigger the event named `event_name`, and with `data` as the input of `callback`
 
 Cancel binding event. You can unbinding a event Object, or just unbinding a event_name.
 
-**3. `size()`**
+**4. `size()`**
 
 Get the event size.
 

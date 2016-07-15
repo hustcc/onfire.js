@@ -27,8 +27,11 @@ English Version Readme. [Click Here](README.md)。
 
 **3. `un(eventObj / eventName)`**
 
-取消事件绑定。可以仅仅取消绑定一个事件回调方法，也可以直接取消全部的事件；
+取消事件绑定。可以仅仅取消绑定一个事件回调方法，也可以直接取消全部的事件。
 
+**4. `size()`**
+
+获得当前的所有事件数量。
 
 # 使用的DEMO
 
