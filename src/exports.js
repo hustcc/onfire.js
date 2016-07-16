@@ -10,6 +10,7 @@
 	
 	return {
 		on: on,
+		one: one,
 		un: un,
 		fire: fire,
 		size: size,

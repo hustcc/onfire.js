@@ -1,6 +1,6 @@
 # onfire.js
 
-> **onfire.js** is a simple events dispatcher library (just `0.7kb`). simple and usefull. 
+> **onfire.js** is a simple events dispatcher library (just `0.8kb`). simple and usefull. 
 
 Can be used in:
 
@@ -17,21 +17,36 @@ Can be used in:
 
 **1. `on(event_name, callback)`**
 
-Binding the `event_name` with `callback`. when has event named `event_name` fired, `callback` function will process.
+Binding / subscribe the `event_name` with `callback`. when has event named `event_name` fired, `callback` function will process.
 
 The function will return the `eventObj`, which can be used to cancel bind with API `un(eventObj)`.
 
-**2. `fire(event_name, data)`**
+**2. `one(event_name, callback)`**
 
-Trigger the event named `event_name`, and with `data` as the input of `callback` function.
+Binding / subscribe the `event_name` with `callback` only once. And it is will timeout after Trigger.
 
-**3. `un(eventObj / event_name)`**
+`Only can be Trigger once`, then it will be deleted automation.
+
+**3. `fire(event_name, data1, data2, data3, ...)`**
+
+Trigger / subscribe the event named `event_name`, and with `datas` as the input of `callback` function.
+
+**4. `un(eventObj / event_name)`**
 
 Cancel binding event. You can unbinding a event Object, or just unbinding a event_name.
 
-**4. `size()`**
+**5. `size()`**
 
 Get the event size.
+
+**6. `events()`**
+
+Get the exist events Array.
+
+**7. `clear()`**
+
+Clear all the event.
+
 
 # Detail Usage
 
@@ -51,7 +66,7 @@ var onfire = require("onfire.js");
 
 **2. simple usage**
 
-Use `on` to subscribe event, use `un` to cancel, and use `fire` to trigger the event.
+Use `on` to subscribe event, use `un` to cancel, and use `fire` to publish / trigger the event.
 
 ```js
 import onfire from 'onfire.js';
@@ -59,15 +74,15 @@ import onfire from 'onfire.js';
 onfire = onfire();
 
 // bind event and callback
-var eventObj = onfire.on('test_event', function(data) {
+var eventObj = onfire.on('test_event', function(data1, data2) {
 	console.log('this is a event 1');
 });
-var eventObj2 = onfire.on('test_event', function(data) {
+var eventObj2 = onfire.on('test_event', function(data1, data2) {
 	console.log('this is a event 2');
 });
 
 // fire event
-onfire.fire('test_event', 'test_data');
+onfire.fire('test_event', 'test_data1', 'test_data2');
 
 // cancel bind event
 onfire.un(eventObj); // only cancel the eventObj.

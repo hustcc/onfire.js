@@ -37,5 +37,20 @@ test('onfire.js show be tested', function (t) {
   var e2 = onfire.on('test_event_1', function(d) {});
   t.deepEqual(onfire.events(), ['test_event', 'test_event_1']);
 
+  console.log('\n===================test one');
+  onfire.clear()
+  var cnt = 0;
+  onfire.one('test_one_event', function(d1, d2) {
+    if (cnt == 0) {
+      t.equal(d1, 'test_one_event_data1');
+      t.equal(d2, 'test_one_event_data2');
+      cnt ++;
+    }
+    else {
+      t.fail(d);
+    }
+  });
+  onfire.fire('test_one_event', 'test_one_event_data1', 'test_one_event_data2');
+
   t.end();
 });
