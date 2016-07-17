@@ -51,6 +51,28 @@ test('onfire.js show be tested', function (t) {
     }
   });
   onfire.fire('test_one_event', 'test_one_event_data1', 'test_one_event_data2');
+  console.log('\n====================test class');
+
+  var Testclass = {
+    type: "macintosh",
+    getExtInfo: function (ext_data, color) {
+      t.equal(ext_data, 'ext_data');
+      t.equal(color, 'blue');
+      t.equal(this.type, 'macintosh');
+    },
+    getInfo: function (color) {
+      t.equal(color, 'blue');
+      t.equal(this.type, 'macintosh');
+    },
+    test: function() {
+      onfire.on('test_event_class_in', Testclass.getInfo.bind(this));
+      onfire.fire('test_event_class_in', 'blue');
+    }
+  }
+
+  onfire.on('test_event_class', Testclass.getExtInfo.bind(Testclass, 'ext_data'));
+  onfire.fire('test_event_class', 'blue');
+  Testclass.test();
 
   t.end();
 });
