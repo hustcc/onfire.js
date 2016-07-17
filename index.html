@@ -50,18 +50,16 @@
 		}
 	}
 	var e1, e2;
-	function callback(t, msg) {
-		if (t == 1) {
-			$_('sub_1_msg').innerHTML = $_('sub_1_msg').innerHTML + msg + '\n';
-		}
-		else {
-			$_('sub_2_msg').innerHTML = $_('sub_2_msg').innerHTML + msg + '\n';
-		}
+	function callback_1(msg) {
+		$_('sub_1_msg').innerHTML = $_('sub_1_msg').innerHTML + msg + '\n';
+	}
+	function callback_2(msg) {
+		$_('sub_2_msg').innerHTML = $_('sub_2_msg').innerHTML + msg + '\n';
 	}
 
 	function checkbox_change_1() {
 		if ($_('sub_1').checked) {
-			e1 = onfire.on('my event', callback.bind(this, 1));
+			e1 = onfire.on('my event', callback_1);
 		}
 		else {
 			console.log(onfire.un(e1));
@@ -69,7 +67,7 @@
 	}
 	function checkbox_change_2() {
 		if ($_('sub_2').checked) {
-			e2 = onfire.on('my event',callback.bind(this, 2));
+			e2 = onfire.on('my event', callback_2);
 		}
 		else {
 			console.log(onfire.un(e2));
@@ -79,10 +77,10 @@
 	$_('sub_2').onchange = checkbox_change_2;
 	
 	if ($_('sub_1').checked) {
-		e1 = onfire.on('my event', callback.bind(this, 1));
+		e1 = onfire.on('my event', callback_1);
 	}
 	if ($_('sub_2').checked) {
-		e2 = onfire.on('my event', callback.bind(this, 2));
+		e2 = onfire.on('my event', callback_2);
 	}
 </script>
 </body>
