@@ -1,6 +1,5 @@
 // global event store
-var slice = Function.call.bind(Array.prototype.slice),
-__onfireEvents = {},
+var __onfireEvents = {},
 __cnt = 0, // 当前事件的计数器，用于拼接事件的key
 length = 0,
 _bind = function(eventName, callback, is_one) {
@@ -32,7 +31,7 @@ fire = function(eventName) {
     for (key in __onfireEvents[eventName]) {
       callback = __onfireEvents[eventName][key];
 
-      callback[0].apply(null, slice(arguments, 1)); // do the function
+      callback[0].apply(null, Array.prototype.slice.call(arguments, 1)); // do the function
       if (callback[1]) delete __onfireEvents[eventName][key]; // when is one, delete it after triggle
     }
   }
