@@ -6,33 +6,50 @@
     root.onfire = factory(root);
 }(typeof window !== 'undefined' ? window : this, function () {
 
+/**
+  Copyright (c) 2016 hustcc http://www.atool.org/
+  License: MIT 
+  https://github.com/hustcc/onfire.js
+**/
 // global event store
-var slice = Function.call.bind(Array.prototype.slice),
-__onfireEvents = {},
-__cnt = 0, // 当前事件的计数器，用于拼接事件的key
-length = 0,
+var __onfireEvents = {},
+__cnt = 0, // evnet counter
 _bind = function(eventName, callback, is_one) {
   if (typeof eventName !== 'string' || typeof callback !== 'function') {
     throw new Error('args[0] must be string, args[1] must be function.');
   }
   if (! __onfireEvents[eventName]) {
     __onfireEvents[eventName] = {};
-    length ++;
   }
-  var key = 'e' + (++__cnt);  // 绑定事件的索引
+  var key = 'e' + (++__cnt);  // event index
   __onfireEvents[eventName][key] = [callback, is_one];
 
   return [eventName, key];
 },
-// 绑定事件
+/**
+ *  onfire.on( event, func ) -> Object
+ *  - event (String): The event name to subscribe / bind to
+ *  - func (Function): The function to call when a new event is published / triggered
+ *  Bind the event name, and the callback function when event is triggered, will return an event Object
+**/
 on = function(eventName, callback) {
   return _bind(eventName, callback, false);
 },
+/**
+ *  onfire.one( event, func ) -> Object
+ *  - event (String): The event name to subscribe / bind to
+ *  - func (Function): The function to call when a new event is published / triggered
+ *  Bind the event name, and the callback function when event is triggered only once(can be triggered for one time), will return an event Object
+**/
 one = function(eventName, callback) {
   return _bind(eventName, callback, true);
 },
-
-// 触发事件
+/**
+ *  onfire.fire( event[, data1 [,data2] ... ] )
+ *  - event (String): The message to publish
+ *  - data...: The data to pass to subscribers / callbacks
+ *  Publishes / fires the the event, passing the data to it's subscribers / callbacks
+**/
 fire = function(eventName) {
   // 触发这个分类下的所有
   var callback, key;
@@ -40,17 +57,33 @@ fire = function(eventName) {
     for (key in __onfireEvents[eventName]) {
       callback = __onfireEvents[eventName][key];
 
-      callback[0].apply(null, slice(arguments, 1)); // do the function
+      callback[0].apply(null, Array.prototype.slice.call(arguments, 1)); // do the function
       if (callback[1]) delete __onfireEvents[eventName][key]; // when is one, delete it after triggle
     }
   }
 },
+/**
+ * onfire.un( event ) -> Boolean
+ *  - event (String / Object): The message to publish
+ * When passed a event Object, removes a specific subscription.
+ * When passed event name String, removes all subscriptions for that event name(hierarchy)
+*
+ * Unsubscribe / unbind an event or event object.
+ *
+ * Examples
+ *
+ *  // Example 1 - unsubscribing with a event object
+ *  var event_object = onfire.on('my_event', myFunc);
+ *  onfire.un(event_object);
+ *
+ *  // Example 2 - unsubscribing with a event name string
+ *  onfire.un('my_event');
+**/
 un = function(eventObject) {
   if (typeof eventObject === 'string') {
-    // 直接取消事件
+    // cancel the event name if exist
     if (__onfireEvents[eventObject]) {
       delete __onfireEvents[eventObject];
-      length --;
       return true;
     }
     return false;
@@ -61,25 +94,35 @@ un = function(eventObject) {
       delete __onfireEvents[eventName][key];
       return true;
     }
-    // 找不到注册事件，返回false
+    // can not find this event, return false
     return false;
   }
 },
+/**
+ *  onfire.clear()
+ *  Clears all subscriptions
+**/
 clear = function() {
   __onfireEvents = {};
-  length = 0;
 },
+/**
+ *  onfire.events()
+ *  Return the array of events.
+**/
 events = function() {
-  var evts = [];
-  for (var e in __onfireEvents) {
+  var evts = [], e;
+  for (e in __onfireEvents) {
     evts.push(e);
   }
   return evts;
 },
+/**
+ *  onfire.size()
+ *  Return the length of events array.
+**/
 size = function () {
-  return length;
+  return events().length;
 };
-
 	
 	return {
 		on: on,
