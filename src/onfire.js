@@ -22,7 +22,7 @@ _bind = function(eventName, callback, is_one) {
  *  onfire.on( event, func ) -> Object
  *  - event (String): The event name to subscribe / bind to
  *  - func (Function): The function to call when a new event is published / triggered
- *  Bind the event name, and the callback function when event is triggered, will return an event Object
+ *  Bind / subscribe the event name, and the callback function when event is triggered, will return an event Object
 **/
 on = function(eventName, callback) {
   return _bind(eventName, callback, false);
@@ -31,7 +31,7 @@ on = function(eventName, callback) {
  *  onfire.one( event, func ) -> Object
  *  - event (String): The event name to subscribe / bind to
  *  - func (Function): The function to call when a new event is published / triggered
- *  Bind the event name, and the callback function when event is triggered only once(can be triggered for one time), will return an event Object
+ *  Bind / subscribe the event name, and the callback function when event is triggered only once(can be triggered for one time), will return an event Object
 **/
 one = function(eventName, callback) {
   return _bind(eventName, callback, true);

@@ -8,7 +8,7 @@ Can be used in:
  - `Cross-component communication` of react / vue.js / angular.
  - evnets subscribe and publish.
 
-中文版说明文档[点这里](README_zh.md)。
+Live DEMO [**here**](git.hust.cc/onfire.js)；. 中文版说明文档[点这里](README_zh.md)。
 
 [![Build Status](https://travis-ci.org/hustcc/onfire.js.svg?branch=master)](https://travis-ci.org/hustcc/onfire.js) [![npm](https://img.shields.io/npm/v/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js) [![npm](https://img.shields.io/npm/dt/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js) [![npm](https://img.shields.io/npm/l/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js)
 

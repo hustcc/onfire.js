@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>onfire.js DEMO</title>
+	<meta name="description" content="onfire.js is a simple events dispatcher subscribe / publish library (just 0.8kb). simple and usefull, can be used to in react / vue / angular for Cross-component communication." />
+	<meta name="keywords" content="onfire, event subscribe, event publish, dispatcher, react, vue.js, angular, component communication" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style type="text/css">
+	#wrapper {
+		width: auto; 
+		max-width: 600px; 
+		margin: 0 auto;
+	}
+	#wrapper > div {
+		margin: 10px 0;
+	}
+	</style>
+</head>
+<body>
+<div id="container">
+	<div id="wrapper">
+		<h1>Example onfire.js</h1>
+		<div>
+			<input type="text" id="message" placeholder="fire event with message" />
+			<input type="button" id="send" value="Fire event with message" />
+		</div>
+		<hr />
+		<div>
+			Subscribe: <input type="checkbox" id="sub_1" checked="true" />
+			<textarea rows="4" id="sub_1_msg" placeholder="all the messages"></textarea>
+		</div>
+		<div>
+			Subscribe: <input type="checkbox" id="sub_2" />
+			<textarea rows="4" id="sub_2_msg" placeholder="all the messages"></textarea>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="dist/onfire.min.js"></script>
+<script type="text/javascript">
+	function $_(id) {
+		return document.getElementById(id);
+	}
+	$_('send').onclick = function() {
+		var msg = $_('message').value;
+		if (msg) {
+			onfire.fire('my event', $_('message').value);
+			$_('message').value = '';
+		}
+	}
+	var e1, e2;
+	function callback(t, msg) {
+		if (t == 1) {
+			$_('sub_1_msg').innerHTML = $_('sub_1_msg').innerHTML + msg + '\n';
+		}
+		else {
+			$_('sub_2_msg').innerHTML = $_('sub_2_msg').innerHTML + msg + '\n';
+		}
+	}
+
+	function checkbox_change_1() {
+		if ($_('sub_1').checked) {
+			e1 = onfire.on('my event', callback.bind(this, 1));
+		}
+		else {
+			console.log(onfire.un(e1));
+		}
+	}
+	function checkbox_change_2() {
+		if ($_('sub_2').checked) {
+			e2 = onfire.on('my event',callback.bind(this, 2));
+		}
+		else {
+			console.log(onfire.un(e2));
+		}
+	}
+	$_('sub_1').onchange = checkbox_change_1;
+	$_('sub_2').onchange = checkbox_change_2;
+	
+	if ($_('sub_1').checked) {
+		e1 = onfire.on('my event', callback.bind(this, 1));
+	}
+	if ($_('sub_2').checked) {
+		e2 = onfire.on('my event', callback.bind(this, 2));
+	}
+</script>
+</body>
+</html>

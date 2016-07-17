@@ -8,7 +8,7 @@
  - 在 react / vue.js / angular 用于跨组件的轻量级实现；
  - 事件订阅和发布；
 
-English Version Readme. [Click Here](README.md)。
+在线示例，点击[**这里**](git.hust.cc/onfire.js)；English Version Readme. [Click Here](README.md)。
 
 [![Build Status](https://travis-ci.org/hustcc/onfire.js.svg?branch=master)](https://travis-ci.org/hustcc/onfire.js) [![npm](https://img.shields.io/npm/v/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js) [![npm](https://img.shields.io/npm/dt/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js) [![npm](https://img.shields.io/npm/l/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js)
 
