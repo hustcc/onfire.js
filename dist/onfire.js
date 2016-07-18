@@ -1,4 +1,3 @@
-/* jshint expr: true */ 
 !function (root, factory) {
   if (typeof module === 'object' && module.exports)
     module.exports = factory(root);
@@ -12,11 +11,10 @@
   https://github.com/hustcc/onfire.js
 **/
 // global event store
-var __onfireEvents = {},
-__cnt = 0, // evnet counter
-_bind = function(eventName, callback, is_one) {
+var __onfireEvents = {}, __cnt = 0; // evnet counter
+function _bind(eventName, callback, is_one) {
   if (typeof eventName !== 'string' || typeof callback !== 'function') {
-    throw new Error('args[0] must be string, args[1] must be function.');
+    throw new Error('args must be (string, function).');
   }
   if (! __onfireEvents[eventName]) {
     __onfireEvents[eventName] = {};
@@ -25,32 +23,32 @@ _bind = function(eventName, callback, is_one) {
   __onfireEvents[eventName][key] = [callback, is_one];
 
   return [eventName, key];
-},
+}
 /**
  *  onfire.on( event, func ) -> Object
  *  - event (String): The event name to subscribe / bind to
  *  - func (Function): The function to call when a new event is published / triggered
  *  Bind / subscribe the event name, and the callback function when event is triggered, will return an event Object
 **/
-on = function(eventName, callback) {
+function on(eventName, callback) {
   return _bind(eventName, callback, false);
-},
+}
 /**
  *  onfire.one( event, func ) -> Object
  *  - event (String): The event name to subscribe / bind to
  *  - func (Function): The function to call when a new event is published / triggered
  *  Bind / subscribe the event name, and the callback function when event is triggered only once(can be triggered for one time), will return an event Object
 **/
-one = function(eventName, callback) {
+function one(eventName, callback) {
   return _bind(eventName, callback, true);
-},
+}
 /**
  *  onfire.fire( event[, data1 [,data2] ... ] )
  *  - event (String): The message to publish
  *  - data...: The data to pass to subscribers / callbacks
  *  Publishes / fires the the event, passing the data to it's subscribers / callbacks
 **/
-fire = function(eventName) {
+function fire(eventName) {
   // 触发这个分类下的所有
   var callback, key;
   if (__onfireEvents[eventName]) {
@@ -61,7 +59,7 @@ fire = function(eventName) {
       if (callback[1]) delete __onfireEvents[eventName][key]; // when is one, delete it after triggle
     }
   }
-},
+}
 /**
  * onfire.un( event ) -> Boolean
  *  - event (String / Object): The message to publish
@@ -79,7 +77,7 @@ fire = function(eventName) {
  *  // Example 2 - unsubscribing with a event name string
  *  onfire.un('my_event');
 **/
-un = function(eventObject) {
+function un(eventObject) {
   if (typeof eventObject === 'string') {
     // cancel the event name if exist
     if (__onfireEvents[eventObject]) {
@@ -97,40 +95,40 @@ un = function(eventObject) {
     // can not find this event, return false
     return false;
   }
-},
+}
 /**
  *  onfire.clear()
  *  Clears all subscriptions
 **/
-clear = function() {
+function clear() {
   __onfireEvents = {};
-},
+}
 /**
  *  onfire.events()
  *  Return the array of events.
 **/
-events = function() {
+function events() {
   var evts = [], e;
   for (e in __onfireEvents) {
     evts.push(e);
   }
   return evts;
-},
+}
 /**
  *  onfire.size()
  *  Return the length of events array.
 **/
-size = function () {
+function size() {
   return events().length;
-};
-	
-	return {
-		on: on,
-		one: one,
-		un: un,
-		fire: fire,
-		size: size,
-		clear: clear,
-		events: events,
-	}
+}
+  
+  return {
+    on: on,
+    one: one,
+    un: un,
+    fire: fire,
+    size: size,
+    clear: clear,
+    events: events,
+  }
 });
