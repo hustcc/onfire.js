@@ -1,6 +1,6 @@
 # onfire.js
 
-> **onfire.js** is a simple events dispatcher library (just `0.8kb`). simple and usefull. 
+> **onfire.js** is a simple events dispatcher library (just `0.9kb`). simple and usefull. 
 
 Can be used in:
 
@@ -31,19 +31,13 @@ Binding / subscribe the `event_name` with `callback` only once. And it is will t
 
 Trigger / subscribe the event named `event_name`, and with `datas` as the input of `callback` function.
 
-**4. `un(eventObj / event_name)`**
+**4. `un(eventObj / event_name / function)`**
 
-Cancel binding event. You can unbinding a event Object, or just unbinding a event_name.
-
-**5. `size()`**
-
-Get the event size.
-
-**6. `events()`**
+Cancel binding event. You can unbinding a event Object, or just unbinding a event_name, or unbind the callback function.
 
 Get the exist events Array.
 
-**7. `clear()`**
+**5. `clear()`**
 
 Clear all the event.
 
@@ -51,6 +45,8 @@ Clear all the event.
 # Detail Usage
 
 **1. import library**
+
+Install javascript library.
 
 > npm install onfire.js
 
@@ -70,13 +66,13 @@ Use `on` to subscribe event, use `un` to cancel, and use `fire` to publish / tri
 
 ```js
 import onfire from 'onfire.js';
-// init the object
-onfire = onfire();
+
+function test_callback(data1, data2) {
+	console.log('this is a event 1');
+}
 
 // bind event and callback
-var eventObj = onfire.on('test_event', function(data1, data2) {
-	console.log('this is a event 1');
-});
+var eventObj = onfire.on('test_event', test_callback);
 var eventObj2 = onfire.on('test_event', function(data1, data2) {
 	console.log('this is a event 2');
 });
@@ -87,9 +83,7 @@ onfire.fire('test_event', 'test_data1', 'test_data2');
 // cancel bind event
 onfire.un(eventObj); // only cancel the eventObj.
 onfire.un('test_event'); // cancel all events named `test_event`.
-
-// size of events
-onfire.size();
+onfire.un(test_callback); // cancel all the `test_callback` functions.
 ```
 
 

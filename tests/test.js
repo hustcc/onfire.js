@@ -2,6 +2,8 @@
 var test = require('tape');
 var onfire = require('..');
 
+Object.prototype.test = 123;
+
 test('onfire.js show be tested', function (t) {
 
   console.log('===================test on');
@@ -12,16 +14,13 @@ test('onfire.js show be tested', function (t) {
     t.fail(d);
   });
 
-  t.equal(onfire.size(), 2);
 
   console.log('\n===================test un');
   t.equal(onfire.un(e2), true);
   t.equal(onfire.un(e2), false);
-  t.equal(onfire.size(), 2);
 
   t.equal(onfire.un('test_event_1'), true);
   t.equal(onfire.un('test_event_1'), false);
-  t.equal(onfire.size(), 1);
 
   console.log('\n===================test fire');
   onfire.fire('test_event', 't1_test_data');
@@ -30,17 +29,11 @@ test('onfire.js show be tested', function (t) {
   console.log('\n===================test clear');
   onfire.clear()
 
-  t.equal(onfire.size(), 0);
-
-  console.log('\n===================test events');
-  var e1 = onfire.on('test_event', function(d) {});
-  var e2 = onfire.on('test_event_1', function(d) {});
-  t.deepEqual(onfire.events(), ['test_event', 'test_event_1']);
 
   console.log('\n===================test one');
   onfire.clear()
   var cnt = 0;
-  onfire.one('test_one_event', function(d1, d2) {
+  onfire.one('test_event', function(d1, d2) {
     if (cnt == 0) {
       t.equal(d1, 'test_one_event_data1');
       t.equal(d2, 'test_one_event_data2');
@@ -50,7 +43,8 @@ test('onfire.js show be tested', function (t) {
       t.fail(d);
     }
   });
-  onfire.fire('test_one_event', 'test_one_event_data1', 'test_one_event_data2');
+  onfire.fire('test_event', 'test_one_event_data1', 'test_one_event_data2');
+  onfire.fire('test_event', 'test_one_event_data1', 'test_one_event_data2');
   console.log('\n====================test class');
 
   var Testclass = {
@@ -74,5 +68,29 @@ test('onfire.js show be tested', function (t) {
   onfire.fire('test_event_class', 'blue');
   Testclass.test();
 
+  console.log('\n====================test un function / event name / object');
+  onfire.clear();
+  function test_callback(type, d1, d2) {
+    t.fail(type);
+    t.fail(d1);
+    t.fail(d2);
+  }
+  onfire.on('test_eventname', test_callback);
+
+  var r = onfire.un('test_eventname');
+  t.equal(r, true);
+  onfire.fire('test_eventname', 1, 'test_event_data1', 'test_event_data2')
+
+  e1 = onfire.on('test_object', test_callback);
+  r = onfire.un(e1);
+  t.equal(r, true);
+  onfire.fire('test_object', 2, 'test_event_data1', 'test_event_data2')
+
+  onfire.on('testfunc', test_callback);
+  r = onfire.un(test_callback);
+  t.equal(r, true);
+  onfire.fire('testfunc', 3, 'test_event_data1', 'test_event_data2')
+
+  t.pass('test un success');
   t.end();
 });

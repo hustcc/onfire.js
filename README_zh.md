@@ -1,6 +1,6 @@
 # onfire.js
 
-> **onfire.js** 是一个很简单的事件分发的Javascript库（仅仅 `0.8kb`），简洁实用。
+> **onfire.js** 是一个很简单的事件分发的Javascript库（仅仅 `0.9kb`），简洁实用。
 
 可以用于:
 
@@ -25,7 +25,7 @@
 
 绑定（订阅）事件，参数为 `event_name` with `callback`. 当被触发一次之后失效。**`只能被触发一次，一次之后自动失效`**。
 
-**3. `fire(event_name, data)`**
+**3. `fire(event_name, data1, data2, ...)`**
 
 触发名字为 `event_name` 的事件，并且赋予系列变量`datas`为`callback`方法的输入值。
 
@@ -33,15 +33,7 @@
 
 取消事件绑定。可以仅仅取消绑定一个事件回调方法，也可以直接取消全部的事件。
 
-**5. `size()`**
-
-获得当前的所有事件数量。
-
-**6. `events()`**
-
-返回所有的事件名称数组。
-
-**7. `clear()`**
+**5. `clear()`**
 
 清空所有事件。
 
@@ -69,10 +61,12 @@ var onfire = require("onfire.js");
 ```js
 import onfire from 'onfire.js';
 
-// 绑定事件
-var eventObj = onfire.on('test_event', function(data1， data2) {
+function test_callback(data1, data2) {
 	console.log('this is a event 1');
-});
+}
+
+// 绑定事件
+var eventObj = onfire.on('test_event', test_callback);
 var eventObj2 = onfire.on('test_event', function(data1, data2) {
 	console.log('this is a event 2');
 });
@@ -83,9 +77,7 @@ onfire.fire('test_event', 'test_data1'， 'test_data2');
 // 取消绑定
 onfire.un(eventObj); // 取消绑定这个事件.
 onfire.un('test_event'); // 取消绑定所有的 `test_event`.
-
-// 长度
-onfire.size();
+onfire.un(test_callback); // 取消绑定所有的 `test_callback` 方法.
 ```
 
 
