@@ -15,13 +15,13 @@
 
 # API 方法
 
-**1. `on(event_name, callback)`**
+**1. `on(event_name, callback, context)`**
 
 绑定事件，参数为 `event_name` 和 `callback`， 当有名字为`event_name`的事件发生的时候，`callback`方法将会被执行。
 
 这个方法会返回一个`eventObj`，这个可以用于使用`un(eventObj)`方法来取消事件绑定。
 
-**2. `one(event_name, callback)`**
+**2. `one(event_name, callback, context)`**
 
 绑定（订阅）事件，参数为 `event_name` with `callback`. 当被触发一次之后失效。**`只能被触发一次，一次之后自动失效`**。
 

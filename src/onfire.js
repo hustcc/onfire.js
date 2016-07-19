@@ -17,7 +17,7 @@
   function hasOwnKey(obj, key) {
     return obj.hasOwnProperty(key);
   }
-  function _bind(eventName, callback, is_one) {
+  function _bind(eventName, callback, is_one, context) {
     if (typeof eventName !== 'string' || typeof callback !== 'function') {
       throw new Error('args must be (string, function).');
     }
@@ -25,7 +25,7 @@
       __onfireEvents[eventName] = {};
     }
     var key = 'e' + (++__cnt);  // event index
-    __onfireEvents[eventName][key] = [callback, is_one];
+    __onfireEvents[eventName][key] = [callback, is_one, context];
 
     return [eventName, key];
   }
@@ -38,22 +38,22 @@
     }
   }
   /**
-   *  onfire.on( event, func ) -> Object
+   *  onfire.on( event, func, context ) -> Object
    *  - event (String): The event name to subscribe / bind to
    *  - func (Function): The function to call when a new event is published / triggered
    *  Bind / subscribe the event name, and the callback function when event is triggered, will return an event Object
   **/
-  function on(eventName, callback) {
-    return _bind(eventName, callback, 0);
+  function on(eventName, callback, context) {
+    return _bind(eventName, callback, 0, context);
   }
   /**
-   *  onfire.one( event, func ) -> Object
+   *  onfire.one( event, func, context ) -> Object
    *  - event (String): The event name to subscribe / bind to
    *  - func (Function): The function to call when a new event is published / triggered
    *  Bind / subscribe the event name, and the callback function when event is triggered only once(can be triggered for one time), will return an event Object
   **/
-  function one(eventName, callback) {
-    return _bind(eventName, callback, 1);
+  function one(eventName, callback, context) {
+    return _bind(eventName, callback, 1, context);
   }
   /**
    *  onfire.fire( event[, data1 [,data2] ... ] )
@@ -66,17 +66,9 @@
     var args = Array.prototype.slice.call(arguments, 1);
     if (hasOwnKey(__onfireEvents, eventName)) {
       _each(__onfireEvents[eventName], function(key, item) {
-        item[0].apply(null, args); // do the function
+        item[0].apply(item[2], args); // do the function
         if (item[1]) delete __onfireEvents[eventName][key]; // when is one, delete it after triggle
       });
-      // for (key in __onfireEvents[eventName]) {
-      //   if (hasOwnKey(__onfireEvents[eventName], key)) {
-      //     callback = __onfireEvents[eventName][key];
-
-      //     callback[0].apply(null, args); // do the function
-      //     if (callback[1]) delete __onfireEvents[eventName][key]; // when is one, delete it after triggle
-      //   }
-      // }
     }
   }
   /**

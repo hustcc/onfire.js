@@ -15,13 +15,13 @@ Live DEMO [**here**](http://git.hust.cc/onfire.js). 中文版说明文档[点这
 
 # API method
 
-**1. `on(event_name, callback)`**
+**1. `on(event_name, callback, context)`**
 
 Binding / subscribe the `event_name` with `callback`. when has event named `event_name` fired, `callback` function will process.
 
 The function will return the `eventObj`, which can be used to cancel bind with API `un(eventObj)`.
 
-**2. `one(event_name, callback)`**
+**2. `one(event_name, callback, context)`**
 
 Binding / subscribe the `event_name` with `callback` only once. And it is will timeout after Trigger.
 
