@@ -29,15 +29,19 @@ Binding / subscribe the `event_name` with `callback` only once. And it is will t
 
 **3. `fire(event_name, data1, data2, data3, ...)`**
 
-Trigger / subscribe the event named `event_name`, and with `datas` as the input of `callback` function.
+`Async` Trigger / subscribe the event named `event_name`, and with `datas` as the input of `callback` function.
 
-**4. `un(eventObj / event_name / function)`**
+**4. `fireSync(event_name, data1, data2, ...)`**
+
+`Sync` Trigger / subscribe the event named `event_name`, and with `datas` as the input of `callback` function.
+
+**5. `un(eventObj / event_name / function)`**
 
 Cancel binding event. You can unbinding a event Object, or just unbinding a event_name, or unbind the callback function.
 
 Get the exist events Array.
 
-**5. `clear()`**
+**6. `clear()`**
 
 Clear all the event.
 

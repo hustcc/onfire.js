@@ -29,11 +29,15 @@
 
 触发名字为 `event_name` 的事件，并且赋予系列变量`datas`为`callback`方法的输入值。
 
-**4. `un(eventObj / event_name)`**
+**4. `fireSync(event_name, data1, data2, ...)`**
+
+同步的方式触发名字为 `event_name` 的事件，并且赋予系列变量`datas`为`callback`方法的输入值。阻塞。
+
+**5. `un(eventObj / event_name)`**
 
 取消事件绑定。可以仅仅取消绑定一个事件回调方法，也可以直接取消全部的事件。
 
-**5. `clear()`**
+**6. `clear()`**
 
 清空所有事件。
 

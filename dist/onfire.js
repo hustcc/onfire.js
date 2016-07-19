@@ -6,39 +6,35 @@
 /* jshint expr: true */ 
 !function (root, factory) {
   if (typeof module === 'object' && module.exports)
-    module.exports = factory(root);
+    module.exports = factory();
   else
-    root.onfire = factory(root);
+    root.onfire = factory();
 }(typeof window !== 'undefined' ? window : this, function () {
   var __onfireEvents = {},
    __cnt = 0, // evnet counter
-   t = true,
-   f = false;
-  function hasOwnKey(obj, key) {
-    return obj.hasOwnProperty(key);
-  }
+   string_str = 'string',
+   function_str = 'function',
+   hasOwnKey = Function.call.bind(Object.hasOwnProperty),
+   slice = Function.call.bind(Array.prototype.slice);
+
   function _bind(eventName, callback, is_one, context) {
-    if (typeof eventName !== 'string' || typeof callback !== 'function') {
-      throw new Error('args must be (string, function).');
+    if (typeof eventName !== string_str || typeof callback !== function_str) {
+      throw new Error('args: '+string_str+', '+function_str+'');
     }
     if (! hasOwnKey(__onfireEvents, eventName)) {
       __onfireEvents[eventName] = {};
     }
-    var key = 'e' + (++__cnt);  // event index
-    __onfireEvents[eventName][key] = [callback, is_one, context];
+    __onfireEvents[eventName][++__cnt] = [callback, is_one, context];
 
-    return [eventName, key];
+    return [eventName, __cnt];
   }
   function _each(obj, callback) {
-    var key;
-    for (key in obj) {
-      if (hasOwnKey(obj, key)) {
-        callback(key, obj[key]);
-      }
+    for (var key in obj) {
+      if (hasOwnKey(obj, key)) callback(key, obj[key]);
     }
   }
   /**
-   *  onfire.on( event, func ) -> Object
+   *  onfire.on( event, func, context ) -> Object
    *  - event (String): The event name to subscribe / bind to
    *  - func (Function): The function to call when a new event is published / triggered
    *  Bind / subscribe the event name, and the callback function when event is triggered, will return an event Object
@@ -47,7 +43,7 @@
     return _bind(eventName, callback, 0, context);
   }
   /**
-   *  onfire.one( event, func ) -> Object
+   *  onfire.one( event, func, context ) -> Object
    *  - event (String): The event name to subscribe / bind to
    *  - func (Function): The function to call when a new event is published / triggered
    *  Bind / subscribe the event name, and the callback function when event is triggered only once(can be triggered for one time), will return an event Object
@@ -55,21 +51,32 @@
   function one(eventName, callback, context) {
     return _bind(eventName, callback, 1, context);
   }
-  /**
-   *  onfire.fire( event[, data1 [,data2] ... ] )
-   *  - event (String): The message to publish
-   *  - data...: The data to pass to subscribers / callbacks
-   *  Publishes / fires the the event, passing the data to it's subscribers / callbacks
-  **/
-  function fire(eventName) {
-    // fire events
-    var args = Array.prototype.slice.call(arguments, 1);
+  function _fire_func(eventName, args) {
     if (hasOwnKey(__onfireEvents, eventName)) {
       _each(__onfireEvents[eventName], function(key, item) {
         item[0].apply(item[2], args); // do the function
         if (item[1]) delete __onfireEvents[eventName][key]; // when is one, delete it after triggle
       });
     }
+  }
+  /**
+   *  onfire.fire( event[, data1 [,data2] ... ] )
+   *  - event (String): The event name to publish
+   *  - data...: The data to pass to subscribers / callbacks
+   *  Async Publishes / fires the the event, passing the data to it's subscribers / callbacks
+  **/
+  function fire(eventName) {
+    // fire events
+    setTimeout(_fire_func(eventName, slice(arguments, 1)), 0);
+  }
+  /**
+   *  onfire.fireSync( event[, data1 [,data2] ... ] )
+   *  - event (String): The event name to publish
+   *  - data...: The data to pass to subscribers / callbacks
+   *  Sync Publishes / fires the the event, passing the data to it's subscribers / callbacks
+  **/
+  function fireSync(eventName) {
+    _fire_func(eventName, slice(arguments, 1));
   }
   /**
    * onfire.un( event ) -> Boolean
@@ -89,38 +96,37 @@
    *  onfire.un('my_event');
   **/
   function un(event) {
-    var eventName, key;
-    if (typeof event === 'string') {
+    var eventName, key, r = false, type = typeof event;
+    if (type === string_str) {
       // cancel the event name if exist
       if (hasOwnKey(__onfireEvents, event)) {
         delete __onfireEvents[event];
-        return t;
+        return true;
       }
-      return f;
+      return false;
     }
-    else if (typeof event === 'object') {
+    else if (type === 'object') {
       eventName = event[0];
       key = event[1];
       if (hasOwnKey(__onfireEvents, eventName) && hasOwnKey(__onfireEvents[eventName], key)) {
         delete __onfireEvents[eventName][key];
-        return t;
+        return true;
       }
       // can not find this event, return false
-      return f;
+      return false;
     }
-    else if (typeof event === 'function') {
-      var r = f;
+    else if (type === function_str) {
       _each(__onfireEvents, function(key_1, item_1) {
         _each(item_1, function(key_2, item_2) {
           if (item_2[0] === event) {
             delete __onfireEvents[key_1][key_2];
-            r = t;
+            r = true;
           }
         });
       });
       return r;
     }
-    return f;
+    return true;
   }
   /**
    *  onfire.clear()
@@ -134,6 +140,7 @@
     one: one,
     un: un,
     fire: fire,
+    fireSync: fireSync,
     clear: clear
   };
 });
