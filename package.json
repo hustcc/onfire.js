@@ -1,9 +1,9 @@
 {
   "name": "onfire.js",
   "officialName": "onfire.js",
-  "version": "1.0.4",
-  "summary": "onfire.js is a simple events dispatcher subscribe / publish library (just 0.9kb). simple and usefull, can be used to in react / vue / angular for Cross-component communication.",
-  "description": "onfire.js is a simple events dispatcher subscribe / publish library (just 0.9kb). simple and usefull.",
+  "version": "1.0.5",
+  "summary": "onfire.js is a simple events dispatcher subscribe / publish library (just 0.9kb). aysnc, simple and usefull, can be used to in react / vue / angular for Cross-component communication.",
+  "description": "onfire.js is a simple events dispatcher subscribe / publish library (just 0.9kb). aysnc, simple and usefull.",
   "author": {
     "name": "hustcc",
     "url": "http://git.hust.cc/onfire.js"

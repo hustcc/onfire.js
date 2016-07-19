@@ -27,7 +27,7 @@
 
 **3. `fire(event_name, data1, data2, ...)`**
 
-触发名字为 `event_name` 的事件，并且赋予系列变量`datas`为`callback`方法的输入值。
+异步方式触发名字为 `event_name` 的事件，并且赋予系列变量`datas`为`callback`方法的输入值。
 
 **4. `fireSync(event_name, data1, data2, ...)`**
 
