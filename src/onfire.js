@@ -67,7 +67,10 @@
   **/
   function fire(eventName) {
     // fire events
-    setTimeout(_fire_func(eventName, slice(arguments, 1)), 0);
+    var args = slice(arguments, 1);
+    setTimeout(function () {
+      _fire_func(eventName, args);
+    });
   }
   /**
    *  onfire.fireSync( event[, data1 [,data2] ... ] )
