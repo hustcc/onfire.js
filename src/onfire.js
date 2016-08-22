@@ -67,8 +67,9 @@
   **/
   function fire(eventName) {
     // fire events
+    var args = slice(arguments, 1);
     setTimeout(function () {
-      _fire_func(eventName, slice(arguments, 1));
+      _fire_func(eventName, args);
     });
   }
   /**
