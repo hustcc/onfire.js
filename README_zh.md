@@ -13,7 +13,7 @@
 [![Build Status](https://travis-ci.org/hustcc/onfire.js.svg?branch=master)](https://travis-ci.org/hustcc/onfire.js) [![npm](https://img.shields.io/npm/v/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js) [![npm](https://img.shields.io/npm/dt/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js) [![npm](https://img.shields.io/npm/l/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js)
 
 
-# API 方法
+## 1. API 方法
 
 **1. `on(event_name, callback, context)`**
 
@@ -42,7 +42,7 @@
 清空所有事件。
 
 
-# 使用的DEMO
+## 2. 使用的DEMO
 
 **1. 引入js文件**
 
@@ -85,6 +85,6 @@ onfire.un(test_callback); // 取消绑定所有的 `test_callback` 方法.
 ```
 
 
-# LICENSE
+## LICENSE
 
-MIT
+MIT@[hustcc](https://github.com/hustcc)

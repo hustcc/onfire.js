@@ -13,7 +13,7 @@ Live DEMO [**here**](http://git.hust.cc/onfire.js). 中文版说明文档[点这
 [![Build Status](https://travis-ci.org/hustcc/onfire.js.svg?branch=master)](https://travis-ci.org/hustcc/onfire.js) [![npm](https://img.shields.io/npm/v/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js) [![npm](https://img.shields.io/npm/dt/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js) [![npm](https://img.shields.io/npm/l/onfire.js.svg?style=flat-square)](https://www.npmjs.com/package/onfire.js)
 
 
-# API method
+## 1. API method
 
 **1. `on(event_name, callback, context)`**
 
@@ -46,7 +46,7 @@ Get the exist events Array.
 Clear all the event.
 
 
-# Detail Usage
+## 2. Detail Usage
 
 **1. import library**
 
@@ -91,6 +91,6 @@ onfire.un(test_callback); // cancel all the `test_callback` functions.
 ```
 
 
-# LICENSE
+## LICENSE
 
-MIT
+MIT@[hustcc](https://github.com/hustcc)
