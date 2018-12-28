@@ -45,7 +45,7 @@ describe('OnFire', () => {
     });
   });
 
-  test('emit', () => {
+  test('fire', () => {
     const ee = new EE();
 
     const fn = jest.fn();
