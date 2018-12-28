@@ -1,25 +1,23 @@
 {
   "name": "onfire.js",
   "officialName": "onfire.js",
-  "version": "1.0.6",
-  "summary": "onfire.js is a simple events dispatcher subscribe / publish library (just 0.9kb). aysnc, simple and usefull, can be used to in react / vue / angular for Cross-component communication.",
-  "description": "onfire.js is a simple events dispatcher subscribe / publish library (just 0.9kb). aysnc, simple and usefull.",
+  "version": "2.0.0",
+  "summary": "onfire.js is a mini (~500 b) version for event-emitter.",
+  "description": "onfire.js is a mini (~500 b) version for event-emitter.",
   "author": {
     "name": "hustcc",
-    "url": "http://git.hust.cc/onfire.js"
+    "url": "https://atool.vip/"
   },
   "license": "MIT",
   "keywords": [
     "onfire",
-    "event subscribe",
-    "event publish",
-    "dispatcher",
-    "react",
-    "vue.js",
-    "angular",
-    "component communication"
+    "ee",
+    "event",
+    "emitter",
+    "event-emitter",
+    "subscribe"
   ],
-  "main": "dist/onfire.min.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/hustcc/onfire.js"
@@ -28,17 +26,41 @@
     "url": "https://github.com/hustcc/onfire.js/issues"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-uglify": "^1.5.3",
-    "jshint": "^2.9.2",
-    "gulp-rename": "^1.2.2",
-    "tape": "^3.6.1"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@types/jest": "^23.3.10",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-version": "^0.2.3",
+    "jest": "^23.6.0",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
   },
   "scripts": {
-    "lint": "jshint src/onfire.js",
-    "test": "npm run lint && node tests/test.js",
-    "build": "gulp mini && npm run test"
+    "lint": "tsc --noEmit",
+    "test": "jest",
+    "build": "rimraf tmp lib && tsc && babel tmp --out-dir lib --copy-files && rimraf tmp"
   },
-  "dependencies": {
+  "dependencies": {},
+  "jest": {
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,js}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!src/**/*.{d.ts}"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
   }
 }

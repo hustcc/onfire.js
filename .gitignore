@@ -1,5 +1,5 @@
-.project
-.settings
-
-node_modules/*
-
+.idea
+*.tgz
+lib
+node_modules
+coverage

@@ -1,0 +1,10 @@
+.idea
+.babelrc
+.gitignore
+.travis.yml
+*.tgz
+tsconfig.json
+node_modules
+coverage
+__tests__
+src
