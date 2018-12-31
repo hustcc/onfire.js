@@ -1,5 +1,8 @@
 /**
  * mini (~500 b) version for event-emitter.
+ *
+ * Created by hustcc on 2018/12/31
+ * Contract: vip@hust.edu.cn
  */
 
 export interface Listener {
@@ -14,9 +17,9 @@ export interface EventsType {
 /**
  * const ee = new OnFire();
  *
- * ee.on('click', () => {});
+ * ee.on('click', (...values) => {});
  *
- * ee.on('mouseover', () => {});
+ * ee.on('mouseover', (...values) => {});
  *
  * ee.emit('click', 1, 2, 3);
  * ee.fire('mouseover', {}); // same with emit
@@ -48,7 +51,9 @@ export default class OnFire {
   fire(eventName: string, ...params: any[]) {
     const listeners = this.es[eventName] || [];
 
-    for (let i = 0; i < listeners.length; i ++) {
+    let l = listeners.length;
+
+    for (let i = 0; i < l; i ++) {
       const { cb, once } = listeners[i];
 
       cb.apply(this, params);
@@ -56,6 +61,7 @@ export default class OnFire {
       if (once) {
         listeners.splice(i, 1);
         i --;
+        l --;
       }
     }
   }
@@ -71,10 +77,12 @@ export default class OnFire {
       } else {
         const listeners = this.es[eventName] || [];
         // clean the event and listener
-        for (let i = 0; i < listeners.length; i ++) {
+        let l = listeners.length;
+        for (let i = 0; i < l; i ++) {
           if (listeners[i].cb === cb) {
             listeners.splice(i, 1);
             i --;
+            l --;
           }
         }
       }

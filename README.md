@@ -35,10 +35,10 @@ ee.off('click');
 Simple and similar with `event-emitter`.
 
 
- - **on**(eventName: string, callback: Function): listen an event.
- - **once**(eventName: string, callback: Function): listen a event only once.
- - **fire**(eventName: string, ...parameters: any[]): emit / trigger an event with parameters.
- - **off**(eventName?: string, callback?: Function): unsubscribe an event.
+ - **on(eventName: string, callback: Function)**: listen an event.
+ - **once(eventName: string, callback: Function)**: listen a event only once.
+ - **fire(eventName: string, ...parameters: any[])**: emit / trigger an event with parameters.
+ - **off(eventName?: string, callback?: Function)**: unsubscribe an event.
 
 
 
