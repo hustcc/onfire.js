@@ -6,6 +6,9 @@
 [![npm](https://img.shields.io/npm/v/onfire.js.svg)](https://www.npmjs.com/package/onfire.js)
 
 
+[中文文档](./README_zh.md) | [English Doc](./README.md)
+
+
 ## Install
 
 > npm i --save onfire.js
@@ -35,10 +38,18 @@ ee.off('click');
 Simple and similar with `event-emitter`.
 
 
- - **on(eventName: string, callback: Function)**: listen an event.
- - **once(eventName: string, callback: Function)**: listen a event only once.
- - **fire(eventName: string, ...parameters: any[])**: emit / trigger an event with parameters.
- - **off(eventName?: string, callback?: Function)**: unsubscribe an event.
+ - `on(eventName: string, callback: Function)`: listen an event.
+ - `once(eventName: string, callback: Function)`: listen a event only once.
+ - `fire(eventName: string, ...parameters: any[])`: emit / trigger an event with parameters.
+ - `off(eventName?: string, callback?: Function)`: unsubscribe an event.
+
+
+
+## Used
+
+ - Events subscribe and dispatcher.
+ - `Cross-component communication` for React / Vue / Angular.
+ - System event mechanism.
 
 
 
