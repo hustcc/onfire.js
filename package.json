@@ -1,7 +1,7 @@
 {
   "name": "onfire.js",
   "officialName": "onfire.js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "summary": "onfire.js is a mini (~500 b) version for event-emitter.",
   "description": "onfire.js is a mini (~500 b) version for event-emitter.",
   "author": {

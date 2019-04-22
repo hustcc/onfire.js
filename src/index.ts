@@ -90,5 +90,7 @@ export default class OnFire {
   }
 
   // cname of fire
-  emit = this.fire;
+  emit(eventName: string, ...params: any[]) {
+    this.fire(eventName, ...params);
+  }
 }
